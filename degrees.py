@@ -66,7 +66,7 @@ def main():
     if source is None:
         sys.exit("Person not found.")
     target = person_id_for_name(input("Name: "))
-    if target is None:
+    if target is None or target is source:
         sys.exit("Person not found.")
 
     path = shortest_path(source, target)
@@ -101,23 +101,23 @@ def shortest_path(source, target):
         if frontier.empty():
             return None
         node = frontier.remove()
-        if node.state == target:
-            movie_ids = []
-            actor_ids = []
-            while node.parent is not None:
-                movie_ids.append(node.action)
-                actor_ids.append(node.state)
-                node = node.parent
-            movie_ids.reverse()
-            actor_ids.reverse()
-            for i in range(len(movie_ids)):
-                solution.append((movie_ids[i], actor_ids[i]))
-            return solution
         explored.add(node.state)
         num_steps += 1
         for movie, actor in neighbors_for_person(node.state):
             if not frontier.contains_state(actor) and actor not in explored:
                 child = Node(state=actor, parent=node, action=movie)
+                if child.state == target:
+                    movie_ids = []
+                    actor_ids = []
+                    while child.parent is not None:
+                        movie_ids.append(child.action)
+                        actor_ids.append(child.state)
+                        child = child.parent
+                    movie_ids.reverse()
+                    actor_ids.reverse()
+                    for i in range(len(movie_ids)):
+                        solution.append((movie_ids[i], actor_ids[i]))
+                    return solution
                 frontier.add(child)
 
 
