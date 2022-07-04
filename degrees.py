@@ -93,16 +93,14 @@ def shortest_path(source, target):
     """
     frontier = QueueFrontier()
     num_steps = 0
-
     start = Node(state=source, parent=None, action=None)
     frontier.add(start)
     explored = set()
     solution = []
     while True:
         if frontier.empty():
-            raise Exception("no solution")
+            return None
         node = frontier.remove()
-
         if node.state == target:
             movie_ids = []
             actor_ids = []
@@ -115,10 +113,8 @@ def shortest_path(source, target):
             for i in range(len(movie_ids)):
                 solution.append((movie_ids[i], actor_ids[i]))
             return solution
-
         explored.add(node.state)
         num_steps += 1
-
         for movie, actor in neighbors_for_person(node.state):
             if not frontier.contains_state(actor) and actor not in explored:
                 child = Node(state=actor, parent=node, action=movie)
