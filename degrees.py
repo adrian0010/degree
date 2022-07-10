@@ -96,29 +96,29 @@ def main_timed():
     print("Data loaded.")
     end_l = time.time()
     print(f"Loading Time: {end_l-start_l}")
+    while True:
+        source = person_id_for_name(input("Name: "))
+        if source is None:
+            sys.exit("Person not found.")
+        target = person_id_for_name(input("Name: "))
+        if target is None or target is source:
 
-    source = person_id_for_name(input("Name: "))
-    if source is None:
-        sys.exit("Person not found.")
-    target = person_id_for_name(input("Name: "))
-    if target is None or target is source:
-
-        sys.exit("Person not found.")
-    start_s = time.time()
-    path = shortest_path(source, target)
-    end_s = time.time()
-    print(f"Searching Time: {end_s - start_s}")
-    if path is None:
-        print("Not connected.")
-    else:
-        degrees = len(path)
-        print(f"{degrees} degrees of separation.")
-        path = [(None, source)] + path
-        for i in range(degrees):
-            person1 = people[path[i][1]]["name"]
-            person2 = people[path[i + 1][1]]["name"]
-            movie = movies[path[i + 1][0]]["title"]
-            print(f"{i + 1}: {person1} and {person2} starred in {movie}")
+            sys.exit("Person not found.")
+        start_s = time.time()
+        path = shortest_path(source, target)
+        end_s = time.time()
+        print(f"Searching Time: {end_s - start_s}")
+        if path is None:
+            print("Not connected.")
+        else:
+            degrees = len(path)
+            print(f"{degrees} degrees of separation.")
+            path = [(None, source)] + path
+            for i in range(degrees):
+                person1 = people[path[i][1]]["name"]
+                person2 = people[path[i + 1][1]]["name"]
+                movie = movies[path[i + 1][0]]["title"]
+                print(f"{i + 1}: {person1} and {person2} starred in {movie}\n")
 
 
 def shortest_path(source, target):
