@@ -118,7 +118,8 @@ def main_timed():
                 person1 = people[path[i][1]]["name"]
                 person2 = people[path[i + 1][1]]["name"]
                 movie = movies[path[i + 1][0]]["title"]
-                print(f"{i + 1}: {person1} and {person2} starred in {movie}\n")
+                print(f"{i + 1}: {person1} and {person2} starred in {movie}")
+            print("")
 
 
 def shortest_path(source, target):
@@ -198,4 +199,4 @@ def neighbors_for_person(person_id):
 
 
 if __name__ == "__main__":
-    main()
+    main_timed()
