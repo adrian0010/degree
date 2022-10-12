@@ -1,4 +1,5 @@
 import csv
+import os
 import sys
 import time
 from util import Node, StackFrontier, QueueFrontier
@@ -60,6 +61,7 @@ def main():
     # Load data from files into memory
     print("Loading data...")
     load_data(directory)
+    os.system('clear')
     print("Data loaded.")
     while True:
         source = person_id_for_name(input("1) Name: "))
@@ -94,6 +96,7 @@ def main_timed():
     start_l = time.time()
     print("Loading data...")
     load_data(directory)
+    os.system('clear')
     print("Data loaded.")
     end_l = time.time()
     print(f"Loading Time: {end_l-start_l}")
