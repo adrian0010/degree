@@ -61,7 +61,7 @@ def main():
     print("Loading data...")
     load_data(directory)
     print("Data loaded.")
-update    while True:
+    while True:
         source = person_id_for_name(input("1) Name: "))
         if source is None:
             print("Person not found.")
