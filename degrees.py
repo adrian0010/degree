@@ -61,27 +61,28 @@ def main():
     print("Loading data...")
     load_data(directory)
     print("Data loaded.")
-
-    source = person_id_for_name(input("Name: "))
-    if source is None:
-        sys.exit("Person not found.")
-    target = person_id_for_name(input("Name: "))
-    if target is None or target is source:
-        sys.exit("Person not found.")
-
-    path = shortest_path(source, target)
-
-    if path is None:
-        print("Not connected.")
-    else:
-        degrees = len(path)
-        print(f"{degrees} degrees of separation.")
-        path = [(None, source)] + path
-        for i in range(degrees):
-            person1 = people[path[i][1]]["name"]
-            person2 = people[path[i + 1][1]]["name"]
-            movie = movies[path[i + 1][0]]["title"]
-            print(f"{i + 1}: {person1} and {person2} starred in {movie}")
+update    while True:
+        source = person_id_for_name(input("1) Name: "))
+        if source is None:
+            print("Person not found.")
+            continue
+        target = person_id_for_name(input("2) Name: "))
+        if target is None or target is source:
+            print("Person not found.")
+            continue
+        path = shortest_path(source, target)
+        if path is None:
+            print("Not connected.")
+        else:
+            degrees = len(path)
+            print(f"{degrees} degrees of separation.")
+            path = [(None, source)] + path
+            for i in range(degrees):
+                person1 = people[path[i][1]]["name"]
+                person2 = people[path[i + 1][1]]["name"]
+                movie = movies[path[i + 1][0]]["title"]
+                print(f"{i + 1}: {person1} and {person2} starred in {movie}")
+            print("")
 
 
 def main_timed():
