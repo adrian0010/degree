@@ -97,13 +97,14 @@ def main_timed():
     end_l = time.time()
     print(f"Loading Time: {end_l-start_l}")
     while True:
-        source = person_id_for_name(input("Name: "))
+        source = person_id_for_name(input("1) Name: "))
         if source is None:
-            sys.exit("Person not found.")
-        target = person_id_for_name(input("Name: "))
+            print("Person not found.")
+            continue
+        target = person_id_for_name(input("2) Name: "))
         if target is None or target is source:
-
-            sys.exit("Person not found.")
+            print("Person not found.")
+            continue
         start_s = time.time()
         path = shortest_path(source, target)
         end_s = time.time()
